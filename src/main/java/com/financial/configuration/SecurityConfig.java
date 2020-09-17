@@ -34,7 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public AuthTokenFilter authJwtTokenFilter() {
 		return new AuthTokenFilter();
-	}	@Autowired
+	}
+	@Autowired
 	@Bean
 	public AuthenticationManager AuthenticationManager() throws Exception  {
 		return super.authenticationManagerBean();
@@ -51,12 +52,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
+		.antMatchers("/api/auth/login/**").permitAll()
 		.antMatchers("/roles/**").authenticated()
 		.and()
 		.httpBasic()
 		.and()
 		.csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		
 		http.addFilterBefore(authJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
 	}

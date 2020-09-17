@@ -25,9 +25,9 @@ public class User {
 	
 	@NotBlank
 	private String lastname;
-		
+	
 	@NotBlank
-	private int mobile;
+	private String mobile;
 	
 	@NotBlank
 	private String username;
@@ -38,7 +38,6 @@ public class User {
 	@NotBlank
 	private String password;
 	
-	@NotBlank
 	private boolean enable;
 	
 	@ManyToMany
@@ -48,16 +47,14 @@ public class User {
 	public User() {
 	}
 	
-	public User(@NotBlank String fristname, @NotBlank String lastname, @NotBlank int mobile, @NotBlank String username,
-			@NotBlank String email, @NotBlank String password, @NotBlank boolean enable, Set<Role> roles) {
+	public User(@NotBlank String fristname, @NotBlank String lastname, @NotBlank String mobile, @NotBlank String username,
+			@NotBlank String email, @NotBlank String password) {
 		this.fristname = fristname;
 		this.lastname = lastname;
 		this.mobile = mobile;
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		this.enable = enable;
-		this.roles = roles;
 	}
 
 	public int getId() {
@@ -84,11 +81,11 @@ public class User {
 		this.lastname = lastname;
 	}
 
-	public int getMobile() {
+	public String getMobile() {
 		return mobile;
 	}
 
-	public void setMobile(int mobile) {
+	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
 
@@ -129,6 +126,6 @@ public class User {
 	}
 
 	public void setEnable(boolean enable) {
-		this.enable = enable;
+		this.enable = true;
 	}
 }

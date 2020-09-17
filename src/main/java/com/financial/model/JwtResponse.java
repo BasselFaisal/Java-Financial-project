@@ -1,11 +1,8 @@
 package com.financial.model;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
-
-import com.financial.entity.Role;
 
 public class JwtResponse {
 	
@@ -13,13 +10,12 @@ public class JwtResponse {
 	private int id;
 	private String fristname;
 	private String lastname;
-	private int mobile;
+	private String mobile;
 	private String username;
 	private String email;
 	private Collection<? extends GrantedAuthority> getAuthorities;
 	
-	
-	public JwtResponse(String token, int id, String fristname, String lastname, int mobile, String username,
+	public JwtResponse(String token, int id, String fristname, String lastname, String mobile, String username,
 			String email, Collection<? extends GrantedAuthority> getAuthorities) {
 		this.token = token;
 		this.id = id;
@@ -42,7 +38,7 @@ public class JwtResponse {
 	public String getLastname() {
 		return lastname;
 	}
-	public int getMobile() {
+	public String getMobile() {
 		return mobile;
 	}
 	public String getUsername() {
@@ -67,7 +63,7 @@ public class JwtResponse {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-	public void setMobile(int mobile) {
+	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
 	public void setUsername(String username) {

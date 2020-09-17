@@ -21,7 +21,7 @@ public class UserDetailsImpl implements UserDetails {
 	
 	private String lastname;
 		
-	private int mobile;
+	private String mobile;
 		
 	private String username;
 	
@@ -34,7 +34,7 @@ public class UserDetailsImpl implements UserDetails {
 	
 	
 	
-	public UserDetailsImpl(int id, String fristname, String lastname, int mobile, String username, String email,
+	public UserDetailsImpl(int id, String fristname, String lastname, String mobile, String username, String email,
 			String password, Collection<? extends GrantedAuthority> getAuthorities) {
 		this.id = id;
 		this.fristname = fristname;
@@ -79,7 +79,7 @@ public class UserDetailsImpl implements UserDetails {
 		return lastname;
 	}
 
-	public int getMobile() {
+	public String getMobile() {
 		return mobile;
 	}
 

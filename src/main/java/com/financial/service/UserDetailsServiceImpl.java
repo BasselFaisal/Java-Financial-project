@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.financial.dao.UserRepositiry;
+import com.financial.dao.UserRepository;
 import com.financial.entity.Role;
 import com.financial.entity.User;
 
@@ -19,7 +19,7 @@ import com.financial.entity.User;
 public class UserDetailsServiceImpl implements org.springframework.security.core.userdetails.UserDetailsService {
 	
 	@Autowired
-	private UserRepositiry userRepositiry;
+	private UserRepository userRepositiry;
 	
 
 	@Override
