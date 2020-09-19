@@ -29,7 +29,7 @@ public class TransactionController {
 	private TransactionRepository transactionRepository;
 
 
-	@GetMapping("/transactions/{walletId}")
+	@GetMapping("/gettransactions/{walletId}")
 	public ResponseEntity<?> getTransations(@PathVariable("walletId") int walletId){
 		
 		Wallet wallet = walletRepository.findById(walletId)
@@ -46,7 +46,7 @@ public class TransactionController {
 		return ResponseEntity.ok(transactionRespons);
 	}
 	
-	@PostMapping("/transactions/{walletId}")
+	@PostMapping("/procsesstransactions/{walletId}")
 	public ResponseEntity<?> ProcessTransaction(@PathVariable("walletId") int walletId
 			, @RequestBody Transaction transaction){
 		

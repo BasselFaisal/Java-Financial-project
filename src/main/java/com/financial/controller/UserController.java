@@ -31,7 +31,7 @@ import com.financial.service.UserDetailsImpl;
 
 @RestController
 @RequestMapping("/api/auth")
-public class AuthenticationController {
+public class UserController {
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
