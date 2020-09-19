@@ -22,6 +22,7 @@ import com.financial.dao.UserRepository;
 import com.financial.entity.ERole;
 import com.financial.entity.Role;
 import com.financial.entity.User;
+import com.financial.entity.Wallet;
 import com.financial.jwt.JwtUtils;
 import com.financial.model.JwtResponse;
 import com.financial.model.LoginRequest;
@@ -43,7 +44,7 @@ public class AuthenticationController {
 	
 	@Autowired
 	private RoleRepository roleRepository;
-	
+		
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
@@ -77,34 +78,18 @@ public class AuthenticationController {
 		 User user = new User(registrationRequest.getFristname(),registrationRequest.getLastname(),registrationRequest.getMobile()
 				 ,registrationRequest.getUsername(), registrationRequest.getEmail(), passwordEncoder.encode(registrationRequest.getPassword()));
 		 
-		 Set<Role> roleList = registrationRequest.getRoles();
-		 
+
 		 Set<Role> roles = new HashSet<>();
-		 
-		 for(Role tempRole : roleList) {
-				switch (tempRole.getName().toString()) {
-				case "admin":
-					Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-					roles.add(adminRole);
-
-					break;
-				case "mod":
-					Role modRole = roleRepository.findByName(ERole.ROLE_MANAGER)
-							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-					roles.add(modRole);
-
-					break;
-				default:
-					Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-					roles.add(userRole);
-				}
-		 }
-		 
+		 Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+				 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+		 roles.add(userRole);
 		 user.setRoles(roles);
-		 userRepository.save(user);
 		 
+		 Wallet wallet = new Wallet(0);		 
+		 user.setWallet(wallet);
+		 
+		 userRepository.save(user);
+
 		return ResponseEntity.ok("registerd");
 	}
 }

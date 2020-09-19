@@ -2,6 +2,7 @@ package com.financial.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -38,6 +40,10 @@ public class User {
 	@NotBlank
 	private String password;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_wallet",joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "wallet_id"))
+	private Wallet wallet;
+	
 	private boolean enable;
 	
 	@ManyToMany
@@ -46,9 +52,22 @@ public class User {
 	
 	public User() {
 	}
-	
-	public User(@NotBlank String fristname, @NotBlank String lastname, @NotBlank String mobile, @NotBlank String username,
-			@NotBlank String email, @NotBlank String password) {
+
+	public User(@NotBlank String fristname, @NotBlank String lastname, @NotBlank String mobile,
+			@NotBlank String username, @NotBlank String email, @NotBlank String password, Wallet wallet,
+			Set<Role> roles) {
+		this.fristname = fristname;
+		this.lastname = lastname;
+		this.mobile = mobile;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
+
+
+
+	public User(@NotBlank String fristname, @NotBlank String lastname, @NotBlank String mobile,
+			@NotBlank String username, @NotBlank String email, @NotBlank String password) {
 		this.fristname = fristname;
 		this.lastname = lastname;
 		this.mobile = mobile;
@@ -61,71 +80,80 @@ public class User {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public String getFristname() {
 		return fristname;
-	}
-
-	public void setFristname(String fristname) {
-		this.fristname = fristname;
 	}
 
 	public String getLastname() {
 		return lastname;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-
 	public String getMobile() {
 		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
 	}
 
 	public String getUsername() {
 		return username;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
 	public String getEmail() {
 		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public Wallet getWallet() {
+		return wallet;
 	}
 
 	public boolean isEnable() {
 		return enable;
 	}
 
-	public void setEnable(boolean enable) {
-		this.enable = true;
+	public Set<Role> getRoles() {
+		return roles;
 	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setFristname(String fristname) {
+		this.fristname = fristname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setWallet(Wallet wallet) {
+		this.wallet = wallet;
+	}
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
 }
