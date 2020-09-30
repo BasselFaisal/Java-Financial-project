@@ -53,7 +53,7 @@ public class TransactionController {
 		Transaction tempTransaction = new Transaction(transaction.getAmount());
 				
 		Wallet wallet = walletRepository.findById(walletId)
-				.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+				.orElseThrow(() -> new RuntimeException("Error: Wallet is not found."));
 		
 		wallet.setBalance(wallet.getBalance() - tempTransaction.getAmount());
 		
